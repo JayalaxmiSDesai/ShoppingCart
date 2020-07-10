@@ -1,0 +1,70 @@
+﻿@using ShoppingApp.Models
+@model List<ShoppingApp.Models.ProductDetails>
+@{
+    ViewBag.Title = "Shopping";
+}
+@{ int sum = 0; }
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<h2>Shopping</h2>
+
+@using (Html.BeginForm("Shopping", "Home"))
+{
+    @Html.ValidationSummary()
+    <div class="col-md-4">
+        <table class="table">
+            <thead>
+                <tr>
+
+                    <th scope="col">Sl.No</th>
+                    <th scope="col">Item Name</th>
+                    <th scope="col">Item Price</th>
+                    <th scope="col">Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(int i = 0; i < Model.Count; i++)
+                {
+
+                <tr>
+                    <td>@Html.TextBoxFor(m => m[i].slno)</td>
+                    <td><h4>@Html.TextBoxFor(m => m[i].ItemName)</h4></td>
+                    <td><h4>@Html.TextBoxFor(m => m[i].Price)</h4></td>
+                    <td>
+                        <h4>@Html.TextBoxFor(m => m[i].Quantity)</h4>
+                        @Html.ValidationMessageFor(m=>m[i].Quantity)
+                    </td>
+                </tr>
+
+                }
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td colspan="4">
+                        <input type="submit" value="Buy" id="btnsubmit" class="btn btn-info" />
+                        @*<a class="btn btn-info" href="@Url.Action("Shopping", "Home")"></a>*@
+                    </td>
+                </tr>
+            </tbody>
+           
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+
+                    <td><b>Total</b></td>
+                    <td>
+                        &#8377;  <b> @ViewBag.Total</b>
+                    </td>
+                </tr>
+
+            </tfoot>
+        </table>
+
+
+    </div>
+
+}
